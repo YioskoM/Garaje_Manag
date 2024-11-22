@@ -1,5 +1,3 @@
-package evaluacion2_ejerciciopractico;
-
 
 import java.util.ArrayList;
 
@@ -46,7 +44,7 @@ public class Garaje implements iGarage {
             return false;
         }
         // Verifica que no haya más del 10% de camion
-        int numCamion = calcularOcupacionPorTipoVehiculo(Camion.class);
+        int numCamion = calcularOcupacionPorTipoVehiculo(Camion.class); //! llamar el arraylist
         if (vehiculo instanceof Camion && ((double)(numCamion + 1) / NUMERO_ESPACIOS) > 0.10) {
             System.out.println("No se puede alquilar más motos. Se supera el 10% de ocupación por camion.");
             return false;

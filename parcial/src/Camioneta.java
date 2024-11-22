@@ -1,4 +1,3 @@
-package evaluacion2_ejerciciopractico;
 
 public class Camioneta extends Vehiculo {
     private String tipoServicio;  // "SUV", "Pickup", "Carga", "Otro"

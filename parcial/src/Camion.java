@@ -1,4 +1,3 @@
-package evaluacion2_ejerciciopractico;
 
 public class Camion extends Vehiculo {
     private int numeroEjes;

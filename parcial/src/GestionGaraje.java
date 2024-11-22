@@ -1,10 +1,11 @@
-package evaluacion2_ejerciciopractico;
+
 import java.util.Scanner;
 
 public class GestionGaraje {
     public static void main(String[] args) {
         Garaje garaje = new Garaje();
         Scanner scanner = new Scanner(System.in);
+        Scanner tipoVehiculo = new Scanner(System.in); // Agregue nuevo escaner para evaluar el tipo de vehiculo
         int opcion;
 
         do {
@@ -62,7 +63,7 @@ public class GestionGaraje {
                 //case hecho en parcial 
                 case 1:
                  System.out.print("Ingrese el tipo de vehículo (auto/moto/camion): ");
-                  String tipo = scanner.nextLine().toLowerCase();
+                  String tipo = tipoVehiculo.next().toLowerCase();
                   if (tipo.equals("camion")) {
                   System.out.print("Ingrese el tipo de camión (sencillo/doble): ");
                   String tipoCamion = scanner.nextLine();

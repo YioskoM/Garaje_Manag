@@ -1,16 +1,15 @@
-package evaluacion2_ejerciciopractico;
-
 public class Auto extends Vehiculo {
+    //! Propiedades
     private boolean tieneRadio;
     private boolean tieneNavegador;
-    
+    //! metodo constructor
     public Auto(String marca, double precio, int cilindraje, boolean tieneRadio, boolean tieneNavegador) {
         super(marca, precio, cilindraje);
         this.tieneRadio = tieneRadio;
         this.tieneNavegador = tieneNavegador;
         ajustarImpuestoYCuota();
     }
-
+    
     public boolean isTieneRadio() {
         return tieneRadio;
     }
@@ -28,6 +27,7 @@ public class Auto extends Vehiculo {
         this.tieneNavegador = tieneNavegador;
         ajustarImpuestoYCuota();
     }
+    
     private void ajustarImpuestoYCuota() {
         // Calcula el impuesto base
         calcularImpuestoCirculacion();
