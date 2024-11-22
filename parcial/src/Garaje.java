@@ -45,7 +45,13 @@ public class Garaje implements iGarage {
         // Verifica que no haya más del 10% de camion
         int numCamion = calcularOcupacionPorTipoVehiculo(Camion.class);
         if (vehiculo instanceof Camion && ((double) (numCamion + 1) / NUMERO_ESPACIOS) > 0.10) {
-            System.out.println("No se puede alquilar más motos. Se supera el 10% de ocupación por camion.");
+            System.out.println("No se puede alquilar más camion. Se supera el 10% de ocupación por camion.");
+            return false;
+        }
+        // Verifica que no haya más del 20% de camioneta
+        int numCamioenta = calcularOcupacionPorTipoVehiculo(Camioneta.class);
+        if (vehiculo instanceof Camioneta && ((double) (numCamioenta + 1) / NUMERO_ESPACIOS) > 0.20) {
+            System.out.println("No se puede alquilar más camionetas. Se supera el 20% de ocupación por camioneta.");
             return false;
         }
         // Verifica que el vehículo tenga matrícula
@@ -83,8 +89,55 @@ public class Garaje implements iGarage {
         int numAutos = calcularOcupacionPorTipoVehiculo(Auto.class);
         int numMotos = calcularOcupacionPorTipoVehiculo(Moto.class);
         int numCamion = calcularOcupacionPorTipoVehiculo(Camion.class);
+        int numCamioenta = calcularOcupacionPorTipoVehiculo(Camioneta.class);
         System.out.println("Número de Autos: " + numAutos);
         System.out.println("Número de Motos: " + numMotos);
         System.out.println("Número de Camiones: " + numCamion);
+        System.out.println("Número de Camionetas: " + numCamioenta);
     }
+
+    public int plazasDisponibles() {
+        return NUMERO_ESPACIOS - espacios.size(); // Espacios totales menos los ocupados
+    }
+
+    public int buscarVehiculo(String placa) {
+        for (int i = 0; i < espacios.size(); i++) {
+            Vehiculo vehiculo = espacios.get(i);
+            if (vehiculo.getPlaca() != null && vehiculo.getPlaca().equals(placa)) {
+                return i; // Retorna la posición si lo encuentra
+            }
+        }
+        return -1; // Retorna -1 si no lo encuentra
+    }
+
+    public void listarCamionetasPorTipo() {
+        int suv = 0, pickup = 0, carga = 0, otro = 0;
+
+        for (Vehiculo vehiculo : espacios) {
+            if (vehiculo instanceof Camioneta) {
+                Camioneta camioneta = (Camioneta) vehiculo;
+                switch (camioneta.getTipoServicio().toLowerCase()) {
+                    case "suv":
+                        suv++;
+                        break;
+                    case "pickup":
+                        pickup++;
+                        break;
+                    case "carga":
+                        carga++;
+                        break;
+                    case "otro":
+                        otro++;
+                        break;
+                }
+            }
+        }
+
+        System.out.println("Camionetas por tipo:");
+        System.out.println("SUV: " + suv);
+        System.out.println("Pickup: " + pickup);
+        System.out.println("Carga: " + carga);
+        System.out.println("Otro: " + otro);
+    }
+
 }
