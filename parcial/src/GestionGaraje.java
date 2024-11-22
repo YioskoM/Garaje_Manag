@@ -45,19 +45,22 @@ public class GestionGaraje {
                         System.out.print("Ingrese la capacidad de carga en toneladas: ");
                         double capacidadCarga = scanner.nextDouble();
                         scanner.nextLine(); 
-                        vehiculo = new Camion(marca, precio, cilindraje, numeroEjes, tipoCamion, capacidadCarga);
+                        vehiculo = new Camion(placa, marca, precio, cilindraje, placa, opcion, cilindraje, numeroEjes, tipoCamion, capacidadCarga);
+                        garaje.alquilarEspacio(vehiculo);
                     } else if (tipo.equals("moto")) {
                         System.out.print("¿Tiene sidecar? (true/false): ");
                         boolean tieneSidecar = scanner.nextBoolean();
                         scanner.nextLine();
-                        vehiculo = new Moto(marca, precio, cilindraje, tieneSidecar);
+                        vehiculo = new Moto(placa, marca, precio, cilindraje, placa, opcion, cilindraje, tieneSidecar);
+                        garaje.alquilarEspacio(vehiculo);
                     } else if (tipo.equals("auto")) {
                         System.out.print("¿Tiene radio? (true/false): ");
                         boolean tieneRadio = scanner.nextBoolean();
                         System.out.print("¿Tiene navegador? (true/false): ");
                         boolean tieneNavegador = scanner.nextBoolean();
                         scanner.nextLine();
-                        vehiculo = new Auto(marca, precio, cilindraje, tieneRadio, tieneNavegador);
+                        vehiculo = new Auto(placa, marca, precio, cilindraje, placa, opcion, cilindraje, tieneRadio, tieneNavegador);
+                        garaje.alquilarEspacio(vehiculo);
                     } else {
                         System.out.println("Tipo de vehículo no reconocido.");
                         break;

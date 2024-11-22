@@ -1,5 +1,13 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package evaluacion2_ejerciciopractico;
 
-
+/**
+ *
+ * @author Karen
+ */
 public class Vehiculo {
    public String placa ;
    public String marca ;
@@ -13,17 +21,18 @@ public class Vehiculo {
     public static final double CUOTA_GARAJE_POR_DEFECTO = 100;
    
     //construtor 
-    public Vehiculo(String marca, double precio, int cilindraje) {
-        this.matricula = null;
+    public Vehiculo(String placa, String marca, double precio, int cilindraje, String matricula,
+            double impuestoCirculacion, double cuotaMesGaraje) {
+        this.placa = placa;
         this.marca = marca;
         this.precio = precio;
         this.cilindraje = cilindraje;
+        this.matricula = matricula;
+        this.impuestoCirculacion = impuestoCirculacion;
         this.cuotaMesGaraje = CUOTA_GARAJE_POR_DEFECTO;
         calcularImpuestoCirculacion(); // Calcula el impuesto de circulación
     }
    
-
-
     public String getPlaca() {
         return placa;
     }

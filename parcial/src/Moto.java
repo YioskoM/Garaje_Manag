@@ -1,9 +1,20 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package evaluacion2_ejerciciopractico;
+
+/**
+ *
+ * @author Karen
+ */
 
  public class Moto extends Vehiculo {
     private boolean tieneSidecar;
 
-    public Moto(String marca, double precio, int cilindraje, boolean tieneSidecar) {
-        super(marca, precio, cilindraje);
+    public Moto(String placa, String marca, double precio, int cilindraje, String matricula, double impuestoCirculacion,
+            double cuotaMesGaraje, boolean tieneSidecar) {
+        super(placa, marca, precio, cilindraje, matricula, impuestoCirculacion, cuotaMesGaraje);
         this.tieneSidecar = tieneSidecar;
         ajustarImpuestoYCuota();
     }
