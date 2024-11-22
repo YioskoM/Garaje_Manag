@@ -63,10 +63,12 @@ public class GestionGaraje {
                 //case hecho en parcial 
                 case 1:
                  System.out.print("Ingrese el tipo de vehículo (auto/moto/camion): ");
-                  String tipo = tipoVehiculo.next().toLowerCase();
+                  String tipo = tipoVehiculo.next().toLowerCase(); // evalua el tipo de vehiculo
+                  Vehiculo vehiculo;
                   if (tipo.equals("camion")) {
+                     // si el tipo es camion entonces
                   System.out.print("Ingrese el tipo de camión (sencillo/doble): ");
-                  String tipoCamion = scanner.nextLine();
+                  String tipoCamion = scanner.nextLine(); 
                   System.out.print("Ingrese el número de ejes: ");
                   int numeroEjes = scanner.nextInt();
                   System.out.print("Ingrese la capacidad de carga en toneladas: ");
@@ -82,14 +84,33 @@ public class GestionGaraje {
                   System.out.print("Ingrese la matrícula (6 caracteres): ");
                   String placa = scanner.nextLine();
                 
-                  Vehiculo vehiculo;
+
                   vehiculo = new Camion(marca, precio, cilindraje, numeroEjes, tipoCamion, capacidadCarga);
-                    if (tipo.equals("moto")) {
+                  garaje.espacios.add(vehiculo); //agregar a espacios del garaje, camion
+
+                    if (!vehiculo.matricular(placa)) {
+                        System.out.println("Matrícula inválida. Debe tener 6 caracteres.");
+                        break;
+                    }
+                    } else if (tipo.equals("moto")) {
+                        System.out.print("Ingrese la marca: ");
+                        String marca = scanner.nextLine();
+                        System.out.print("Ingrese el precio: ");
+                        double precio = scanner.nextDouble();
+                        System.out.print("Ingrese el cilindraje: ");
+                        int cilindraje = scanner.nextInt();
                         System.out.print("¿Tiene sidecar? (true/false): ");
                         boolean tieneSidecar = scanner.nextBoolean();
                         scanner.nextLine(); 
                         vehiculo = new Moto(marca, precio, cilindraje, tieneSidecar);
+
                     } else if (tipo.equals("auto")) {
+                        System.out.print("Ingrese la marca: ");
+                        String marca = scanner.nextLine();
+                        System.out.print("Ingrese el precio: ");
+                        double precio = scanner.nextDouble();
+                        System.out.print("Ingrese el cilindraje: ");
+                        int cilindraje = scanner.nextInt();
                         System.out.print("¿Tiene radio? (true/false): ");
                         boolean tieneRadio = scanner.nextBoolean();
                         System.out.print("¿Tiene navegador? (true/false): ");
@@ -99,12 +120,6 @@ public class GestionGaraje {
                     } else {
                         System.out.println("Tipo de vehículo no reconocido.");
                         break;
-                    }
-
-                    if (!vehiculo.matricular(placa)) {
-                        System.out.println("Matrícula inválida. Debe tener 6 caracteres.");
-                        break;
-                    }
                     }
                     break;
                 case 2:
@@ -125,6 +140,10 @@ public class GestionGaraje {
                 case 5:
                     garaje.listarVehiculos();
                     break;
+
+                case 6:
+
+                break;
 
                 case 0:
                     System.out.println("Saliendo del sistema...");
