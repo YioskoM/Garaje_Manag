@@ -1,16 +1,15 @@
+package evaluacion2_ejerciciopractico;
 
 import java.util.ArrayList;
 
-
 public class Garaje implements iGarage {
-    public static final int NUMERO_ESPACIOS = 50; 
+    public static final int NUMERO_ESPACIOS = 50;
     public ArrayList<Vehiculo> espacios;
 
     public Garaje() {
         espacios = new ArrayList<>();
     }
 
-   
     @Override
     public double calcularIngresos() {
         double ingresos = 0;
@@ -31,21 +30,21 @@ public class Garaje implements iGarage {
         return contador;
     }
 
-    
     public boolean alquilarEspacio(Vehiculo vehiculo) {
-        if (espacios.size() >= NUMERO_ESPACIOS) {
-            System.out.println("No hay espacios disponibles.");
-            return false;
+        if (espacios.size() < NUMERO_ESPACIOS) {
+            espacios.add(vehiculo); // Agregar el vehículo al garaje
+            return true;
         }
+
         // Verifica que no haya más del 80% de motos
         int numMotos = calcularOcupacionPorTipoVehiculo(Moto.class);
-        if (vehiculo instanceof Moto && ((double)(numMotos + 1) / NUMERO_ESPACIOS) > 0.8) {
+        if (vehiculo instanceof Moto && ((double) (numMotos + 1) / NUMERO_ESPACIOS) > 0.8) {
             System.out.println("No se puede alquilar más motos. Se supera el 80% de ocupación por motos.");
             return false;
         }
         // Verifica que no haya más del 10% de camion
-        int numCamion = calcularOcupacionPorTipoVehiculo(Camion.class); //! llamar el arraylist
-        if (vehiculo instanceof Camion && ((double)(numCamion + 1) / NUMERO_ESPACIOS) > 0.10) {
+        int numCamion = calcularOcupacionPorTipoVehiculo(Camion.class);
+        if (vehiculo instanceof Camion && ((double) (numCamion + 1) / NUMERO_ESPACIOS) > 0.10) {
             System.out.println("No se puede alquilar más motos. Se supera el 10% de ocupación por camion.");
             return false;
         }
@@ -54,27 +53,29 @@ public class Garaje implements iGarage {
             System.out.println("No se puede alquilar un vehículo sin matrícula.");
             return false;
         }
-        // Alquila el espacio
-        espacios.add(vehiculo);
         System.out.println("Vehículo alquilado exitosamente.");
-        return true;
+        return false; // No hay espacio disponible
+
     }
 
     public boolean retirarVehiculo(String placa) {
-        for (Vehiculo v : espacios) {
-            if (v.getPlaca().equals(placa)) {
-                espacios.remove(v);
-                System.out.println("Vehículo retirado exitosamente.");
+        for (int i = 0; i < espacios.size(); i++) {
+            Vehiculo vehiculo = espacios.get(i);
+            // Verificar si la matrícula del vehículo es nula antes de compararla
+            if (vehiculo.getPlaca() != null && vehiculo.getPlaca().equals(placa)) {
+                espacios.remove(i);
+                System.out.println("Vehículo con matrícula " + placa + " retirado del garaje.");
                 return true;
             }
         }
-        System.out.println("Vehículo no encontrado.");
+        System.out.println("No se encontró un vehículo con la matrícula: " + placa);
         return false;
     }
 
     public void listarVehiculos() {
         for (Vehiculo v : espacios) {
-            System.out.println("Matrícula: " + v.getPlaca() + ", Cuota Mensual: " + v.getcuotaMesGaraje() + ", Tipo: " + v.getClass().getSimpleName());
+            System.out.println("Matrícula: " + v.getPlaca() + ", Cuota Mensual: " + v.getcuotaMesGaraje() + ", Tipo: "
+                    + v.getClass().getSimpleName());
         }
     }
 
@@ -84,8 +85,6 @@ public class Garaje implements iGarage {
         int numCamion = calcularOcupacionPorTipoVehiculo(Camion.class);
         System.out.println("Número de Autos: " + numAutos);
         System.out.println("Número de Motos: " + numMotos);
-        System.out.println("Número de Motos: " + numCamion);
+        System.out.println("Número de Camiones: " + numCamion);
     }
 }
-
-   
