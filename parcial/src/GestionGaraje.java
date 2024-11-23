@@ -1,4 +1,3 @@
-package evaluacion2_ejerciciopractico;
 
 import java.util.Scanner;
 
@@ -50,13 +49,11 @@ public class GestionGaraje {
                         scanner.nextLine();
                         vehiculo = new Camion(placa, marca, precio, cilindraje, placa, opcion, cilindraje, numeroEjes,
                                 tipoCamion, capacidadCarga);
-                        garaje.alquilarEspacio(vehiculo);
                     } else if (tipo.equals("moto")) {
                         System.out.print("¿Tiene sidecar? (true/false): ");
                         boolean tieneSidecar = scanner.nextBoolean();
                         scanner.nextLine();
                         vehiculo = new Moto(placa, marca, precio, cilindraje, placa, opcion, cilindraje, tieneSidecar);
-                        garaje.alquilarEspacio(vehiculo);
                     } else if (tipo.equals("auto")) {
                         System.out.print("¿Tiene radio? (true/false): ");
                         boolean tieneRadio = scanner.nextBoolean();
@@ -65,7 +62,6 @@ public class GestionGaraje {
                         scanner.nextLine();
                         vehiculo = new Auto(placa, marca, precio, cilindraje, placa, opcion, cilindraje, tieneRadio,
                                 tieneNavegador);
-                        garaje.alquilarEspacio(vehiculo);
                     } else if (tipo.equals("camioneta")) {
                         System.out.print("Ingrese el tipo de servicio (SUV/Pickup/Carga/Otro): ");
                         String tipoServicio = scanner.nextLine();
@@ -76,7 +72,7 @@ public class GestionGaraje {
                         scanner.nextLine();
                         vehiculo = new Camioneta(placa, marca, precio, cilindraje, placa, opcion, cilindraje,
                                 tipoServicio, numeroPasajeros, tieneRemolque);
-                        garaje.alquilarEspacio(vehiculo);
+                        
                     } else {
                         System.out.println("Tipo de vehículo no reconocido.");
                         break;

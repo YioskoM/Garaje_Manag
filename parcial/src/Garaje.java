@@ -1,4 +1,4 @@
-package evaluacion2_ejerciciopractico;
+
 
 import java.util.ArrayList;
 
@@ -70,7 +70,8 @@ public class Garaje implements iGarage {
             // Verificar si la matrícula del vehículo es nula antes de compararla
             if (vehiculo.getPlaca() != null && vehiculo.getPlaca().equals(placa)) {
                 espacios.remove(i);
-                System.out.println("Vehículo con matrícula " + placa + " retirado del garaje.");
+                System.out.println("Vehículo con matrícula " + placa + "la marca " + vehiculo.marca  + " retirado del garaje.");
+                
                 return true;
             }
         }
