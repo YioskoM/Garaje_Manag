@@ -2,14 +2,30 @@ package  evaluacion2_ejerciciopractico.Garajes;
 
 import java.util.ArrayList;
 
-
-
-
-
-
 public class Garaje implements iGarage {
     public static final int NUMERO_ESPACIOS = 50;
     public ArrayList<Vehiculo> espacios;
+
+    //! Crear la classe Garaje con los atributos COMMIT OPEN#1
+    private String departamento;
+    private String ciudad;
+    private String direccion;
+    private int numero;
+    private String email;
+    private String nameAdmin;
+
+
+
+    //! crear constructores COMMIT OPEN#2
+    public Garaje(String departamento, String ciudad, String direccion, int numero, String email,
+            String nameAdmin) {
+        this.departamento = departamento;
+        this.ciudad = ciudad;
+        this.direccion = direccion;
+        this.numero = numero;
+        this.email = email;
+        this.nameAdmin = nameAdmin;
+    }
 
     public Garaje() {
         espacios = new ArrayList<>();
