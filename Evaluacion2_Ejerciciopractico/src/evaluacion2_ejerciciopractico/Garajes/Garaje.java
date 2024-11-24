@@ -1,4 +1,4 @@
-package  evaluacion2_ejerciciopractico.Vehiculo;
+package  evaluacion2_ejerciciopractico.Garajes;
 
 import java.util.ArrayList;
 
