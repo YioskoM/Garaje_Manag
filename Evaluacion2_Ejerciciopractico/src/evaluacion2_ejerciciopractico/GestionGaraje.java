@@ -1,14 +1,13 @@
-package evaluacion2_ejerciciopractico;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 
 public class GestionGaraje {
     public static void main(String[] args) {
-       Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         Scanner garajeOpcion = new Scanner(System.in);
         int opcion;
-        //!crear la coleccion de garajes COMMIT #7 
         ArrayList<Garaje> coleccionGaraje = null;
 
         do{ 
@@ -20,12 +19,9 @@ public class GestionGaraje {
             System.out.println("4. Ver Garajes");
 
             int opcionGar = garajeOpcion.nextInt();
-            scanner.nextLine();
 
             switch (opcionGar) {
                 case 1:
-
-                    //!Creacion del menu para garajes COMMIT OPEN#7
                     System.out.println("Departamento en el cual se localiza el Garaje");
                     String departamento = scanner.nextLine();
                     System.out.println("Ciudad en el cual se localiza el Garaje");
@@ -187,10 +183,12 @@ public class GestionGaraje {
                     
                             scanner.close();
                         }
+
+                        default:
+                        System.out.println("Opción no válida. Intente nuevamente.");
                     } break;
-                default:
-                System.out.println("Opción no válida. Intente nuevamente.");
+
            } while (true);
        
-    }
-}
+        }
+    } 
