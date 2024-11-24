@@ -9,4 +9,19 @@ public class classGaraje {
     private int numero;
     private String email;
     private String nameAdmin;
+
+    public classGaraje() {
+    }
+
+
+
+    public classGaraje(String departamento, String ciudad, String direccion, int numero, String email,
+            String nameAdmin) {
+        this.departamento = departamento;
+        this.ciudad = ciudad;
+        this.direccion = direccion;
+        this.numero = numero;
+        this.email = email;
+        this.nameAdmin = nameAdmin;
+    }
 }
