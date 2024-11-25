@@ -23,7 +23,7 @@ public class GestionGaraje {
 
             int opcionGar = garajeOpcion.nextInt();
 
-            //comentario
+            //no comentarios
 
             switch (opcionGar) {
                 case 1:
