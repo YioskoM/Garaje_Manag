@@ -18,6 +18,8 @@ public class GestionGaraje {
         int opcion;
         // !crear la coleccion de garajes COMMIT #7
         ArrayList<Garaje> coleccionGaraje = new ArrayList<Garaje>();
+        
+
 
         do {
             // !Creacion del menu para garajes COMMIT OPEN#7
@@ -35,29 +37,29 @@ public class GestionGaraje {
 
             switch (opcionGar) {
                 case 1:
+                    Scanner seleccionGaraje = new Scanner(System.in);
                     // ! Opciones del menu garaje COMMIT OPEN#8
                     System.out.println("Departamento en el cual se localiza el Garaje");
-                    String departamento = scanner.nextLine();
+                    String departamento = seleccionGaraje.nextLine();
                     System.out.println("Ciudad en el cual se localiza el Garaje");
-                    String ciudad = scanner.nextLine();
+                    String ciudad = seleccionGaraje.nextLine();
                     System.out.println("Dirección en el cual se encuentra el Garaje");
-                    String direccion = scanner.nextLine();
+                    String direccion = seleccionGaraje.nextLine();
                     System.out.println("Numero telefonico del administrador");
-                    String telefono = scanner.nextLine();
+                    String telefono = seleccionGaraje.nextLine();
 
                     System.out.println("Email del adminstrador");
-                    String email = scanner.nextLine();
+                    String email = seleccionGaraje.nextLine();
                     System.out.println("Nombre completo del administrador");
-                    String nameAdmin = scanner.nextLine();
+                    String nameAdmin = seleccionGaraje.nextLine();
                     System.out.println("Cantidad de espacios que tiene su garaje");
-                    int numEspacios = scanner.nextInt();
+                    int numEspacios = seleccionGaraje.nextInt();
                     // ! Crear Garaje y agregarlo a colecion COMMIT #8
                     Garaje garaje = new Garaje(departamento, ciudad, direccion, telefono, email, nameAdmin, numEspacios);
                     coleccionGaraje.add(garaje);
 
                     System.out.println();
                     System.out.println("Garaje fue creado exitosamente");
-
                     Thread.sleep(2 * 1000);
                     break;
 
@@ -77,7 +79,7 @@ public class GestionGaraje {
                             coleccionGaraje.remove(garajeEliminar);
                             System.out.println();
                             System.out.println("Garaje eliminado exitosamente");
-                            Thread.sleep(3 * 1000);
+                            Thread.sleep(2 * 1000);
 
                         } else {
                             System.out.println();
@@ -93,7 +95,43 @@ public class GestionGaraje {
                     break;
 
                 case 3:
-                    System.out.println("aun no hay opcion");
+                //! Opcion menu 3 COMMIT OPEN #3 ACTUALIZACIÓN
+                    if (coleccionGaraje.size() > 0) {
+                        for (int i = 0; coleccionGaraje.size() > i; i++) {
+                            coleccionGaraje.get(i).mostrarCaracteristicas(i);
+                            System.out.println("");
+                            Thread.sleep(2 * 1000);
+                        }
+                        Scanner actualizar = new Scanner(System.in);
+                        System.out.println("Que garaje deseas actualizar?");
+                        int opcionActualizar = actualizar.nextInt();
+                        if(coleccionGaraje.size() >= opcionActualizar){
+                            //! Actualizar direccion
+                            Scanner seleccionActualizar = new Scanner(System.in);
+                            System.out.println("Actualizar direccion del garaje, DIRECCION ACTUAL: " + coleccionGaraje.get(opcionActualizar).getDireccion());
+                            String direccionActualizar = seleccionActualizar.nextLine();
+                            coleccionGaraje.get(opcionActualizar).setDireccion(direccionActualizar);
+
+                            //! Actualizacion de telefono
+                            System.out.println("Actualizar telefono del garaje, TELEFONO ACTUAL: " + coleccionGaraje.get(opcionActualizar).getNumero());
+                            String telefonoActualizar = seleccionActualizar.nextLine();
+                            coleccionGaraje.get(opcionActualizar).setNumero(telefonoActualizar);
+                            
+                            //! Actualizacion de email
+                            System.out.println("Actualizar email del garaje, EMAIL ACTUAL: "+ coleccionGaraje.get(opcionActualizar).getEmail());
+                            String emailActualizar = seleccionActualizar.nextLine();
+                            coleccionGaraje.get(opcionActualizar).setEmail(emailActualizar);
+
+                            System.out.println("Actualizar administrador, ADMIN ACTUAL: " + coleccionGaraje.get(opcionActualizar).getNameAdmin());
+                            String adminActualizar = seleccionActualizar.nextLine();
+                            coleccionGaraje.get(opcionActualizar).setNameAdmin(adminActualizar);
+                        } else {
+                            System.out.println("Garaje no existe");
+                        }
+                    }else{
+                        System.out.println("No hay garajes creados");
+                    }
+                    
                     break;
 
                 case 4:
@@ -106,6 +144,8 @@ public class GestionGaraje {
                         System.out.println("");
                         System.out.println("Cual garaje deseas escoger?");
                         int opcionGarajeIndice = scanner.nextInt();
+
+                        
                         do {
                             System.out.println("\n--- Menú de Gestión del Garaje ---");
                             System.out.println("1. Alquilar un espacio");
@@ -159,6 +199,7 @@ public class GestionGaraje {
                                         boolean tieneNavegador = scanner.nextBoolean();
                                         scanner.nextLine();
                                         vehiculo = new Auto(tieneNavegador, tieneRadio, placa, marca, precio, cilindraje, placa, opcion, cilindraje, tipo);
+
                                     } else if (tipo.equals("camioneta")) {
                                         System.out.print("Ingrese el tipo de servicio (SUV/Pickup/Carga/Otro): ");
                                         String tipoServicio = scanner.nextLine();
@@ -187,6 +228,7 @@ public class GestionGaraje {
                                                                                                                  // de
                                                                                                                  // inicializar
                                             System.out.println("Vehículo registrado exitosamente.");
+                                            Thread.sleep(2 * 1000);
                                         } else {
                                             System.out.println("No hay espacio disponible en el garaje.");
                                         }

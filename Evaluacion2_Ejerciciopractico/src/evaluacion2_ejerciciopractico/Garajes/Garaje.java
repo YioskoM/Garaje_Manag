@@ -29,15 +29,9 @@ public class Garaje implements iGarage {
         this.nameAdmin = nameAdmin;
         this.numEspacios = numEspacios;
 
+        this.espacios = new ArrayList<>();
+
     }
-
-
-    public Garaje() {
-        espacios = new ArrayList<>();
-    }
-
-    public int NUMERO_ESPACIOS = numEspacios;
-
 
     public String getDepartamento() {
         return departamento;
@@ -143,26 +137,26 @@ public class Garaje implements iGarage {
     }
 
     public boolean alquilarEspacio(Vehiculo vehiculo) {
-        if (espacios.size() < NUMERO_ESPACIOS) {
+        if (espacios.size() < numEspacios) {
             espacios.add(vehiculo); // Agregar el vehículo al garaje
             return true;
         }
 
         // Verifica que no haya más del 80% de motos
         int numMotos = calcularOcupacionPorTipoVehiculo(Moto.class);
-        if (vehiculo instanceof Moto && ((double) (numMotos + 1) / NUMERO_ESPACIOS) > 0.8) {
+        if (vehiculo instanceof Moto && ((double) (numMotos + 1) / numEspacios) > 0.8) {
             System.out.println("No se puede alquilar más motos. Se supera el 80% de ocupación por motos.");
             return false;
         }
         // Verifica que no haya más del 10% de camion
         int numCamion = calcularOcupacionPorTipoVehiculo(Camion.class);
-        if (vehiculo instanceof Camion && ((double) (numCamion + 1) / NUMERO_ESPACIOS) > 0.10) {
+        if (vehiculo instanceof Camion && ((double) (numCamion + 1) / numEspacios) > 0.10) {
             System.out.println("No se puede alquilar más camion. Se supera el 10% de ocupación por camion.");
             return false;
         }
         // Verifica que no haya más del 20% de camioneta
         int numCamioenta = calcularOcupacionPorTipoVehiculo(Camioneta.class);
-        if (vehiculo instanceof Camioneta && ((double) (numCamioenta + 1) / NUMERO_ESPACIOS) > 0.20) {
+        if (vehiculo instanceof Camioneta && ((double) (numCamioenta + 1) / numEspacios) > 0.20) {
             System.out.println("No se puede alquilar más camionetas. Se supera el 20% de ocupación por camioneta.");
             return false;
         }
@@ -209,7 +203,7 @@ public class Garaje implements iGarage {
     }
 
     public int plazasDisponibles() {
-        return NUMERO_ESPACIOS - espacios.size(); // Espacios totales menos los ocupados
+        return numEspacios - espacios.size(); // Espacios totales menos los ocupados
     }
 
     public int buscarVehiculo(String placa) {
