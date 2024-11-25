@@ -6,10 +6,9 @@ public class Camioneta extends Vehiculo {
     private boolean tieneRemolque;
 
     // Constructor
-    public Camioneta(String placa, String marca, double precio, int cilindraje, String matricula,
-            double impuestoCirculacion, double cuotaMesGaraje, String tipoServicio, int numeroPasajeros,
-            boolean tieneRemolque) {
-        super(placa, marca, precio, cilindraje, matricula, impuestoCirculacion, cuotaMesGaraje);
+
+    public Camioneta(int numeroPasajeros, boolean tieneRemolque, String tipoServicio, String placa, String marca, double precio, int cilindraje, String matricula, double impuestoCirculacion, double cuotaMesGaraje, String tipo) {
+        super(placa, marca, precio, cilindraje, matricula, impuestoCirculacion, cuotaMesGaraje, tipo);
         this.tipoServicio = tipoServicio;
         this.numeroPasajeros = numeroPasajeros;
         this.tieneRemolque = tieneRemolque;
@@ -18,6 +17,7 @@ public class Camioneta extends Vehiculo {
         calcularImpuestoCirculacion(); // Impuesto específico
         ajustarCuotaMensual(); // Ajustar cuota mensual específica
     }
+    
 
     private void validarNumeroPasajeros() {
         if (tipoServicio.equals("Pickup") || tipoServicio.equals("Carga")) {

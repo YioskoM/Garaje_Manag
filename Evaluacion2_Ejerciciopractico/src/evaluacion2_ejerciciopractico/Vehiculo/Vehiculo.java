@@ -16,13 +16,14 @@ public class Vehiculo {
    public String matricula;
    public double impuestoCirculacion;
    public double cuotaMesGaraje;
+   public String tipo;
    
     // Constante de clase para la cuota mensual por defecto
     public static final double CUOTA_GARAJE_POR_DEFECTO = 100;
    
     //construtor 
     public Vehiculo(String placa, String marca, double precio, int cilindraje, String matricula,
-            double impuestoCirculacion, double cuotaMesGaraje) {
+            double impuestoCirculacion, double cuotaMesGaraje, String tipo) {
         this.placa = placa;
         this.marca = marca;
         this.precio = precio;
@@ -30,6 +31,7 @@ public class Vehiculo {
         this.matricula = matricula;
         this.impuestoCirculacion = impuestoCirculacion;
         this.cuotaMesGaraje = CUOTA_GARAJE_POR_DEFECTO;
+        this.tipo = tipo;
         calcularImpuestoCirculacion(); // Calcula el impuesto de circulación
     }
    
@@ -107,6 +109,17 @@ public class Vehiculo {
             return false;
         }
     }
+
+    //Metodo mostrar informacion vehiculos
+    public void mostrarCaracteristicasVehiculos(int i){
+        System.out.println("GARAJE " + i);
+        System.out.println("Tipo de vehiculo: " + tipo);
+        System.out.println("Marca: " + marca);
+        System.out.println("Precio: " + precio);
+        System.out.println("Cilindraje: " + cilindraje);
+        System.out.println("Matricula: " + matricula);
+    }
+
 }
 
 

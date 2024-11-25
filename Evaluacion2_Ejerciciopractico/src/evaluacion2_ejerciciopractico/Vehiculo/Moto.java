@@ -13,8 +13,8 @@ package evaluacion2_ejerciciopractico.Vehiculo;
     private boolean tieneSidecar;
 
     public Moto(String placa, String marca, double precio, int cilindraje, String matricula, double impuestoCirculacion,
-            double cuotaMesGaraje, boolean tieneSidecar) {
-        super(placa, marca, precio, cilindraje, matricula, impuestoCirculacion, cuotaMesGaraje);
+            double cuotaMesGaraje, String tipo, boolean tieneSidecar) {
+        super(placa, marca, precio, cilindraje, matricula, impuestoCirculacion, cuotaMesGaraje, tipo);
         this.tieneSidecar = tieneSidecar;
         ajustarImpuestoYCuota();
     }

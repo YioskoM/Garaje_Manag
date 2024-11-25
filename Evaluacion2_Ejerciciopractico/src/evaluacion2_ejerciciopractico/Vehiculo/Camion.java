@@ -7,14 +7,16 @@ public class Camion extends Vehiculo {
 
     // Constructor
     public Camion(String placa, String marca, double precio, int cilindraje, String matricula,
-    double impuestoCirculacion, double cuotaMesGaraje, int numeroEjes, String tipoCamion,
-    double capacidadCarga) {
-    super(placa, marca, precio, cilindraje, matricula, impuestoCirculacion, cuotaMesGaraje);
-    this.numeroEjes = numeroEjes;
-    this.tipoCamion = tipoCamion.toLowerCase();
-    this.capacidadCarga = capacidadCarga;
+            double impuestoCirculacion, double cuotaMesGaraje, String tipo, int numeroEjes, String tipoCamion,
+            double capacidadCarga) {
+        super(placa, marca, precio, cilindraje, matricula, impuestoCirculacion, cuotaMesGaraje, tipo);
+        this.numeroEjes = numeroEjes;
+        this.tipoCamion = tipoCamion.toLowerCase();
+        this.capacidadCarga = capacidadCarga;
 
     if(this.tipoCamion.equals("sencillo"))
+
+    
 
     {
         if (numeroEjes != 2) {

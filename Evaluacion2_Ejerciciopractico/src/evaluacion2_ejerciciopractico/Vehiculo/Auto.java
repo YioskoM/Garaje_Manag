@@ -3,14 +3,13 @@ package  evaluacion2_ejerciciopractico.Vehiculo;
 public class Auto extends Vehiculo {
     private boolean tieneRadio;
     private boolean tieneNavegador;
-    
 
-    public Auto(String placa, String marca, double precio, int cilindraje, String matricula, double impuestoCirculacion,
-            double cuotaMesGaraje, boolean tieneRadio, boolean tieneNavegador) {
-        super(placa, marca, precio, cilindraje, matricula, impuestoCirculacion, cuotaMesGaraje);
-        this.tieneRadio = tieneRadio;
+    public Auto(boolean tieneNavegador, boolean tieneRadio, String placa, String marca, double precio, int cilindraje, String matricula, double impuestoCirculacion, double cuotaMesGaraje, String tipo) {
+        super(placa, marca, precio, cilindraje, matricula, impuestoCirculacion, cuotaMesGaraje, tipo);
         this.tieneNavegador = tieneNavegador;
+        this.tieneRadio = tieneRadio;
     }
+
 
     public boolean isTieneRadio() {
         return tieneRadio;

@@ -7,9 +7,7 @@ import evaluacion2_ejerciciopractico.Vehiculo.Camioneta;
 import java.util.ArrayList;
 
 public class Garaje implements iGarage {
-    public static final int NUMERO_ESPACIOS = 50;
     public ArrayList<Vehiculo> espacios;
-
 
     private String departamento;
     private String ciudad;
@@ -17,21 +15,28 @@ public class Garaje implements iGarage {
     private String numero;
     private String email;
     private String nameAdmin;
+    private int numEspacios;
+   
 
     //! crear constructores COMMIT OPEN#2
-    public Garaje(String departamento, String ciudad, String direccion, String numero, String email,
-            String nameAdmin) {
+    public Garaje(String departamento, String ciudad,
+            String direccion, String numero, String email, String nameAdmin, int numEspacios) {
         this.departamento = departamento;
         this.ciudad = ciudad;
         this.direccion = direccion;
         this.numero = numero;
         this.email = email;
         this.nameAdmin = nameAdmin;
+        this.numEspacios = numEspacios;
+
     }
+
 
     public Garaje() {
         espacios = new ArrayList<>();
     }
+
+    public int NUMERO_ESPACIOS = numEspacios;
 
 
     public String getDepartamento() {
@@ -103,7 +108,7 @@ public class Garaje implements iGarage {
     public void setNameAdmin(String nameAdmin) {
         this.nameAdmin = nameAdmin;
     }
-
+    
     //! Metodo que enseña las caracteristicas del garaje
 
     public void mostrarCaracteristicas(int i){
@@ -116,6 +121,7 @@ public class Garaje implements iGarage {
         System.out.println("Nombre administrador: " + nameAdmin);
     }
 
+    
     @Override
     public double calcularIngresos() {
         double ingresos = 0;

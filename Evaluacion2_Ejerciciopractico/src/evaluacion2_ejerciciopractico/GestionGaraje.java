@@ -42,15 +42,17 @@ public class GestionGaraje {
                     String ciudad = scanner.nextLine();
                     System.out.println("Dirección en el cual se encuentra el Garaje");
                     String direccion = scanner.nextLine();
-                    System.out.println("numero telefonico del administrador");
+                    System.out.println("Numero telefonico del administrador");
                     String telefono = scanner.nextLine();
 
-                    System.out.println("email del adminstrador");
+                    System.out.println("Email del adminstrador");
                     String email = scanner.nextLine();
-                    System.out.println("nombre completo del administrador");
+                    System.out.println("Nombre completo del administrador");
                     String nameAdmin = scanner.nextLine();
+                    System.out.println("Cantidad de espacios que tiene su garaje");
+                    int numEspacios = scanner.nextInt();
                     // ! Crear Garaje y agregarlo a colecion COMMIT #8
-                    Garaje garaje = new Garaje(departamento, ciudad, direccion, telefono, email, nameAdmin);
+                    Garaje garaje = new Garaje(departamento, ciudad, direccion, telefono, email, nameAdmin, numEspacios);
                     coleccionGaraje.add(garaje);
 
                     System.out.println();
@@ -96,8 +98,13 @@ public class GestionGaraje {
 
                 case 4:
                     if (coleccionGaraje.size() > 0) {
-                        System.out.println("muestra toda los garajes (metodo no creado aun)");
-                        System.out.println("cual garaje deseas escoger?");
+                        for (int i = 0; coleccionGaraje.size() > i; i++) {
+                            coleccionGaraje.get(i).mostrarCaracteristicas(i);
+                            System.out.println("");
+                            Thread.sleep(3 * 1000);
+                        }
+                        System.out.println("");
+                        System.out.println("Cual garaje deseas escoger?");
                         int opcionGarajeIndice = scanner.nextInt();
                         do {
                             System.out.println("\n--- Menú de Gestión del Garaje ---");
@@ -139,24 +146,19 @@ public class GestionGaraje {
                                         System.out.print("Ingrese la capacidad de carga en toneladas: ");
                                         double capacidadCarga = scanner.nextDouble();
                                         scanner.nextLine();
-                                        vehiculo = new Camion(placa, marca, precio, cilindraje, placa, opcion,
-                                                cilindraje, numeroEjes,
-                                                tipoCamion, capacidadCarga);
+                                        vehiculo = new Camion(placa, marca, precio, cilindraje, placa, opcion, cilindraje, tipo, numeroEjes, tipoCamion, capacidadCarga);
                                     } else if (tipo.equals("moto")) {
                                         System.out.print("¿Tiene sidecar? (true/false): ");
                                         boolean tieneSidecar = scanner.nextBoolean();
                                         scanner.nextLine();
-                                        vehiculo = new Moto(placa, marca, precio, cilindraje, placa, opcion, cilindraje,
-                                                tieneSidecar);
+                                        vehiculo = new Moto(placa, marca, precio, cilindraje, placa, opcion, cilindraje, tipo, tieneSidecar);
                                     } else if (tipo.equals("auto")) {
                                         System.out.print("¿Tiene radio? (true/false): ");
                                         boolean tieneRadio = scanner.nextBoolean();
                                         System.out.print("¿Tiene navegador? (true/false): ");
                                         boolean tieneNavegador = scanner.nextBoolean();
                                         scanner.nextLine();
-                                        vehiculo = new Auto(placa, marca, precio, cilindraje, placa, opcion, cilindraje,
-                                                tieneRadio,
-                                                tieneNavegador);
+                                        vehiculo = new Auto(tieneNavegador, tieneRadio, placa, marca, precio, cilindraje, placa, opcion, cilindraje, tipo);
                                     } else if (tipo.equals("camioneta")) {
                                         System.out.print("Ingrese el tipo de servicio (SUV/Pickup/Carga/Otro): ");
                                         String tipoServicio = scanner.nextLine();
@@ -165,9 +167,8 @@ public class GestionGaraje {
                                         System.out.print("¿Tiene remolque? (true/false): ");
                                         boolean tieneRemolque = scanner.nextBoolean();
                                         scanner.nextLine();
-                                        vehiculo = new Camioneta(placa, marca, precio, cilindraje, placa, opcion,
-                                                cilindraje,
-                                                tipoServicio, numeroPasajeros, tieneRemolque);
+                                        vehiculo = new Camioneta(numeroPasajeros, tieneRemolque, tipoServicio, placa, marca, precio, cilindraje, marca, precio, precio, tipo);
+                                      
 
                                     } else {
                                         System.out.println("Tipo de vehículo no reconocido.");
@@ -193,6 +194,13 @@ public class GestionGaraje {
                                     break;
 
                                 case 2:
+                                if (coleccionGaraje.size() > 0) {
+                                    for (int i = 0; coleccionGaraje.size() > i; i++) {
+                                        coleccionGaraje.get(i).espacios.get(i).mostrarCaracteristicasVehiculos(i); 
+                                        System.out.println("");
+                                        Thread.sleep(3 * 1000);
+                                    }
+                                }
                                     System.out.print("Ingrese la matrícula del vehículo a retirar: ");
                                     String matriculaRetirar = scanner.nextLine();
                                     coleccionGaraje.get(opcionGarajeIndice).retirarVehiculo(matriculaRetirar);
