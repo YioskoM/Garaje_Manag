@@ -1,3 +1,9 @@
+package evaluacion2_ejerciciopractico.Garajes;
+import evaluacion2_ejerciciopractico.Vehiculo.Vehiculo;
+import evaluacion2_ejerciciopractico.Vehiculo.Moto;
+import evaluacion2_ejerciciopractico.Vehiculo.Auto;
+import evaluacion2_ejerciciopractico.Vehiculo.Camion;
+import evaluacion2_ejerciciopractico.Vehiculo.Camioneta;
 import java.util.ArrayList;
 
 public class Garaje implements iGarage {
