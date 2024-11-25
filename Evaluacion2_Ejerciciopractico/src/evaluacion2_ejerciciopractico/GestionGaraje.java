@@ -4,13 +4,16 @@ import java.util.Scanner;
 
 
 public class GestionGaraje {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         Scanner scanner = new Scanner(System.in);
         Scanner garajeOpcion = new Scanner(System.in);
+
         int opcion;
-        ArrayList<Garaje> coleccionGaraje = null;
+        //!crear la coleccion de garajes COMMIT #7
+        ArrayList<Garaje> coleccionGaraje = new ArrayList<Garaje>();
 
         do{ 
+             //!Creacion del menu para garajes COMMIT OPEN#7
             System.out.println("\n--- Menú de Gestión del Garaje ---");
             System.out.println("");
             System.out.println("1. Crear Garaje");
@@ -20,8 +23,11 @@ public class GestionGaraje {
 
             int opcionGar = garajeOpcion.nextInt();
 
+            
+
             switch (opcionGar) {
                 case 1:
+                    //! Opciones del menu garaje COMMIT OPEN#8
                     System.out.println("Departamento en el cual se localiza el Garaje");
                     String departamento = scanner.nextLine();
                     System.out.println("Ciudad en el cual se localiza el Garaje");
@@ -29,18 +35,51 @@ public class GestionGaraje {
                     System.out.println("Dirección en el cual se encuentra el Garaje");
                     String direccion = scanner.nextLine();
                     System.out.println("numero telefonico del administrador");
-                    int telefono = scanner.nextInt();
+                    String telefono = scanner.nextLine();
+                    
                     System.out.println("email del adminstrador");
                     String email = scanner.nextLine();
                     System.out.println("nombre completo del administrador");
                     String nameAdmin = scanner.nextLine();
-
+                    //! Crear Garaje y agregarlo a colecion COMMIT #8
                     Garaje garaje = new Garaje(departamento, ciudad, direccion, telefono, email, nameAdmin);
                     coleccionGaraje.add(garaje);
+
+                    System.out.println();
+                    System.out.println("Garaje fue creado exitosamente");
+
+                    Thread.sleep(2*1000);
                     break;
 
                     case 2:
-                        System.out.println("aun no hay opcion");
+                        //! Opciones de menu #2 COMMIT OPEN#9
+                        if(coleccionGaraje.size() > 0){
+                        for(int i = 0; coleccionGaraje.size()> i; i++){
+                            coleccionGaraje.get(i).mostrarCaracteristicas(i);
+                            System.out.println("");
+                            Thread.sleep(3*1000);
+                        }
+                        System.out.println("");
+                        System.out.println("Que garaje deseas eliminar?(ingresa el numero)");
+                        int garajeEliminar = scanner.nextInt();
+
+                        if (garajeEliminar <= coleccionGaraje.size()) {
+                            coleccionGaraje.remove(garajeEliminar);
+                            System.out.println();
+                            System.out.println("Garaje eliminado exitosamente");
+                            Thread.sleep(3*1000);
+
+                        } else {
+                            System.out.println();
+                            System.out.println("Garaje no existe");
+                            Thread.sleep(2*1000);
+
+                        }
+                    } else {
+                        System.out.println("");
+                        System.out.println("No tienes Garajes creados");
+                        Thread.sleep(2*1000);
+                    }
                     break;
 
                     case 3:
@@ -48,7 +87,7 @@ public class GestionGaraje {
                     break;
 
                     case 4:
-                        if(coleccionGaraje != null){
+                        if(coleccionGaraje.size() > 0){
                             System.out.println("muestra toda los garajes (metodo no creado aun)");
                             System.out.println("cual garaje deseas escoger?");
                             int opcionGarajeIndice = scanner.nextInt();
@@ -182,13 +221,19 @@ public class GestionGaraje {
                             } while (opcion != 0);
                     
                             scanner.close();
+                        } else {
+                            System.out.println("Aun no existe ningun Garaje");
                         }
 
                         default:
                         System.out.println("Opción no válida. Intente nuevamente.");
-                    } break;
+                        break;
+                    } 
+
 
            } while (true);
        
         }
-    } 
+    }    
+     
+
