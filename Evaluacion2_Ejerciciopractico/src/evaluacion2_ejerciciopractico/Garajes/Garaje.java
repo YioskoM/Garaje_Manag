@@ -1,23 +1,19 @@
-package  evaluacion2_ejerciciopractico.Garajes;
-
 import java.util.ArrayList;
 
 public class Garaje implements iGarage {
     public static final int NUMERO_ESPACIOS = 50;
     public ArrayList<Vehiculo> espacios;
 
-    //! Crear la classe Garaje con los atributos COMMIT OPEN#1
+
     private String departamento;
     private String ciudad;
     private String direccion;
-    private int numero;
+    private String numero;
     private String email;
     private String nameAdmin;
 
-
-
     //! crear constructores COMMIT OPEN#2
-    public Garaje(String departamento, String ciudad, String direccion, int numero, String email,
+    public Garaje(String departamento, String ciudad, String direccion, String numero, String email,
             String nameAdmin) {
         this.departamento = departamento;
         this.ciudad = ciudad;
@@ -31,7 +27,6 @@ public class Garaje implements iGarage {
         espacios = new ArrayList<>();
     }
 
-    //! Crear getters and setters COMMIT OPEN#3
 
     public String getDepartamento() {
         return departamento;
@@ -69,13 +64,13 @@ public class Garaje implements iGarage {
 
 
 
-    public int getNumero() {
+    public String getNumero() {
         return numero;
     }
 
 
 
-    public void setNumero(int numero) {
+    public void setNumero(String numero) {
         this.numero = numero;
     }
 
@@ -101,6 +96,18 @@ public class Garaje implements iGarage {
 
     public void setNameAdmin(String nameAdmin) {
         this.nameAdmin = nameAdmin;
+    }
+
+    //! Metodo que enseña las caracteristicas del garaje
+
+    public void mostrarCaracteristicas(int i){
+        System.out.println("GARAJE " + i);
+        System.out.println("Departamento: " + departamento);
+        System.out.println("Ciudad: " + ciudad);
+        System.out.println("Direccion: " + direccion);
+        System.out.println("Numero telefonico: " + numero);
+        System.out.println("Email: " + email);
+        System.out.println("Nombre administrador: " + nameAdmin);
     }
 
     @Override
