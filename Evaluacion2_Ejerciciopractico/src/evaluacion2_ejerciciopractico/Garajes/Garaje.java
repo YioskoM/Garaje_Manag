@@ -1,9 +1,10 @@
 package evaluacion2_ejerciciopractico.Garajes;
-import evaluacion2_ejerciciopractico.Vehiculo.Vehiculo;
-import evaluacion2_ejerciciopractico.Vehiculo.Moto;
+
 import evaluacion2_ejerciciopractico.Vehiculo.Auto;
 import evaluacion2_ejerciciopractico.Vehiculo.Camion;
 import evaluacion2_ejerciciopractico.Vehiculo.Camioneta;
+import evaluacion2_ejerciciopractico.Vehiculo.Moto;
+import evaluacion2_ejerciciopractico.Vehiculo.Vehiculo;
 import java.util.ArrayList;
 
 public class Garaje implements iGarage {
@@ -16,9 +17,8 @@ public class Garaje implements iGarage {
     private String email;
     private String nameAdmin;
     private int numEspacios;
-   
 
-    //! crear constructores COMMIT OPEN#2
+    // ! crear constructores COMMIT OPEN#2
     public Garaje(String departamento, String ciudad,
             String direccion, String numero, String email, String nameAdmin, int numEspacios) {
         this.departamento = departamento;
@@ -37,75 +37,61 @@ public class Garaje implements iGarage {
         return departamento;
     }
 
-
-
     public void setDepartamento(String departamento) {
         this.departamento = departamento;
     }
-
-
 
     public String getCiudad() {
         return ciudad;
     }
 
-
-
     public void setCiudad(String ciudad) {
         this.ciudad = ciudad;
     }
-
-
 
     public String getDireccion() {
         return direccion;
     }
 
-
-
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
-
-
 
     public String getNumero() {
         return numero;
     }
 
-
-
     public void setNumero(String numero) {
         this.numero = numero;
     }
-
-
 
     public String getEmail() {
         return email;
     }
 
-
-
     public void setEmail(String email) {
         this.email = email;
     }
-
-
 
     public String getNameAdmin() {
         return nameAdmin;
     }
 
-
-
     public void setNameAdmin(String nameAdmin) {
         this.nameAdmin = nameAdmin;
     }
-    
-    //! Metodo que enseña las caracteristicas del garaje
 
-    public void mostrarCaracteristicas(int i){
+    public int getNumEspacios() {
+        return numEspacios;
+    }
+
+    public void setNumEspacios(int numEspacios) {
+        this.numEspacios = numEspacios;
+    }
+
+    // ! Metodo que enseña las caracteristicas del garaje
+
+    public void mostrarCaracteristicas(int i) {
         System.out.println("GARAJE " + i);
         System.out.println("Departamento: " + departamento);
         System.out.println("Ciudad: " + ciudad);
@@ -115,7 +101,6 @@ public class Garaje implements iGarage {
         System.out.println("Nombre administrador: " + nameAdmin);
     }
 
-    
     @Override
     public double calcularIngresos() {
         double ingresos = 0;
@@ -144,8 +129,8 @@ public class Garaje implements iGarage {
 
         // Verifica que no haya más del 80% de motos
         int numMotos = calcularOcupacionPorTipoVehiculo(Moto.class);
-        if (vehiculo instanceof Moto && ((double) (numMotos + 1) / numEspacios) > 0.8) {
-            System.out.println("No se puede alquilar más motos. Se supera el 80% de ocupación por motos.");
+        if (vehiculo instanceof Moto && ((double) (numMotos + 1) / numEspacios) > 0.20) {
+            System.out.println("No se puede alquilar más motos. Se supera el 20% de ocupación por motos.");
             return false;
         }
         // Verifica que no haya más del 10% de camion
@@ -176,7 +161,8 @@ public class Garaje implements iGarage {
             // Verificar si la matrícula del vehículo es nula antes de compararla
             if (vehiculo.getPlaca() != null && vehiculo.getPlaca().equals(placa)) {
                 espacios.remove(i);
-                System.out.println("Vehículo con matrícula " + placa + "la marca " + vehiculo.marca  + " retirado del garaje.");
+                System.out.println(
+                        "Vehículo con matrícula " + placa + "la marca " + vehiculo.marca + " retirado del garaje.");
                 return true;
             }
         }
@@ -245,5 +231,50 @@ public class Garaje implements iGarage {
         System.out.println("Carga: " + carga);
         System.out.println("Otro: " + otro);
     }
+
+    public boolean puedeAgregarCamion() {
+        int limiteCamiones = this.numEspacios > 100 ? 20 : 10;
+        int camionesActuales = calcularOcupacionPorTipoVehiculo(Camion.class);
+
+        return camionesActuales >= limiteCamiones;
+    }
+
+    // Para un garaje específico
+    public  void mostrarOcupacionGaraje() {
+        int espaciosOcupados = espacios.size();
+        int espaciosTotales = getNumEspacios();
+        double porcentajeOcupacion = (espaciosOcupados * 100.0) / espaciosTotales;
+
+        System.out.println(" Informe de Ocupación del Garaje ");
+        System.out.println("Ubicación: " + getCiudad() + ", " + getDireccion());
+        System.out.println("Espacios ocupados: " + espaciosOcupados);
+        System.out.println("Espacios totales: " + espaciosTotales);
+        System.out.println("Porcentaje de ocupación: " + String.format("%.2f%%", porcentajeOcupacion));
+    }
+
+
+    // informe por tipo de vehiculo 
+    
+        public void mostrarOcupacionPorTipo() {
+            System.out.println(" Ocupación por Tipo de Vehículo ");
+            System.out.println("Garaje: " + getCiudad() + ", " + getDireccion());
+
+            int autos = calcularOcupacionPorTipoVehiculo(Auto.class);
+            int motos = calcularOcupacionPorTipoVehiculo(Moto.class);
+            int camiones = calcularOcupacionPorTipoVehiculo(Camion.class);
+            int camionetas = calcularOcupacionPorTipoVehiculo(Camioneta.class);
+
+            System.out.println("Autos: " + autos + " (" +
+                    String.format("%.1f%%", (autos * 100.0) / getNumEspacios()) + ")");
+            System.out.println("Motos: " + motos + " (" +
+                    String.format("%.1f%%", (motos * 100.0) / getNumEspacios()) + ")");
+            System.out.println("Camiones: " + camiones + " (" +
+                    String.format("%.1f%%", (camiones * 100.0) / getNumEspacios()) + ")");
+            System.out.println("Camionetas: " + camionetas + " (" +
+                    String.format("%.1f%%", (camionetas * 100.0) / getNumEspacios()) + ")");
+        }
+    
+     
+    
 
 }
