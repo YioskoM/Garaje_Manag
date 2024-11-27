@@ -13,10 +13,15 @@ public class GestionGaraje {
     public static void main(String[] args) throws InterruptedException {
         Scanner scanner = new Scanner(System.in);
         Scanner garajeOpcion = new Scanner(System.in);
+        
 
         int opcion;
         // !crear la coleccion de garajes COMMIT #7
         ArrayList<Garaje> coleccionGaraje = new ArrayList<Garaje>();
+        ArrayList<String> matriculas = new ArrayList<String>();
+
+
+
 
         do {
             // !Creacion del menu para garajes COMMIT OPEN#7
@@ -26,12 +31,11 @@ public class GestionGaraje {
             System.out.println("2. Eliminar Garaje");
             System.out.println("3. Actualizar Garaje");
             System.out.println("4. Ver Garajes");
-            System.out.println("5. Informes");
             System.out.print("Seleccione una opción: ");
 
             int opcionGar = garajeOpcion.nextInt();
 
-           
+            // no comentarios
 
             switch (opcionGar) {
                 case 1:
@@ -53,8 +57,7 @@ public class GestionGaraje {
                     System.out.println("Cantidad de espacios que tiene su garaje");
                     int numEspacios = seleccionGaraje.nextInt();
                     // ! Crear Garaje y agregarlo a colecion COMMIT #8
-                    Garaje garaje = new Garaje(departamento, ciudad, direccion, telefono, email, nameAdmin,
-                            numEspacios);
+                    Garaje garaje = new Garaje(departamento, ciudad, direccion, telefono, email, nameAdmin, numEspacios);
                     coleccionGaraje.add(garaje);
 
                     System.out.println();
@@ -94,7 +97,7 @@ public class GestionGaraje {
                     break;
 
                 case 3:
-                    // ! Opcion menu 3 COMMIT OPEN #3 ACTUALIZACIÓN
+                //! Opcion menu 3 COMMIT OPEN #3 ACTUALIZACIÓN
                     if (coleccionGaraje.size() > 0) {
                         for (int i = 0; coleccionGaraje.size() > i; i++) {
                             coleccionGaraje.get(i).mostrarCaracteristicas(i);
@@ -104,37 +107,33 @@ public class GestionGaraje {
                         Scanner actualizar = new Scanner(System.in);
                         System.out.println("Que garaje deseas actualizar?");
                         int opcionActualizar = actualizar.nextInt();
-                        if (coleccionGaraje.size() >= opcionActualizar) {
-                            // ! Actualizar direccion
+                        if(coleccionGaraje.size() >= opcionActualizar){
+                            //! Actualizar direccion
                             Scanner seleccionActualizar = new Scanner(System.in);
-                            System.out.println("Actualizar direccion del garaje, DIRECCION ACTUAL: "
-                                    + coleccionGaraje.get(opcionActualizar).getDireccion());
+                            System.out.println("Actualizar direccion del garaje, DIRECCION ACTUAL: " + coleccionGaraje.get(opcionActualizar).getDireccion());
                             String direccionActualizar = seleccionActualizar.nextLine();
                             coleccionGaraje.get(opcionActualizar).setDireccion(direccionActualizar);
 
-                            // ! Actualizacion de telefono
-                            System.out.println("Actualizar telefono del garaje, TELEFONO ACTUAL: "
-                                    + coleccionGaraje.get(opcionActualizar).getNumero());
+                            //! Actualizacion de telefono
+                            System.out.println("Actualizar telefono del garaje, TELEFONO ACTUAL: " + coleccionGaraje.get(opcionActualizar).getNumero());
                             String telefonoActualizar = seleccionActualizar.nextLine();
                             coleccionGaraje.get(opcionActualizar).setNumero(telefonoActualizar);
-
-                            // ! Actualizacion de email
-                            System.out.println("Actualizar email del garaje, EMAIL ACTUAL: "
-                                    + coleccionGaraje.get(opcionActualizar).getEmail());
+                            
+                            //! Actualizacion de email
+                            System.out.println("Actualizar email del garaje, EMAIL ACTUAL: "+ coleccionGaraje.get(opcionActualizar).getEmail());
                             String emailActualizar = seleccionActualizar.nextLine();
                             coleccionGaraje.get(opcionActualizar).setEmail(emailActualizar);
 
-                            System.out.println("Actualizar administrador, ADMIN ACTUAL: "
-                                    + coleccionGaraje.get(opcionActualizar).getNameAdmin());
+                            System.out.println("Actualizar administrador, ADMIN ACTUAL: " + coleccionGaraje.get(opcionActualizar).getNameAdmin());
                             String adminActualizar = seleccionActualizar.nextLine();
                             coleccionGaraje.get(opcionActualizar).setNameAdmin(adminActualizar);
                         } else {
                             System.out.println("Garaje no existe");
                         }
-                    } else {
+                    }else{
                         System.out.println("No hay garajes creados");
                     }
-
+                    
                     break;
 
                 case 4:
@@ -148,6 +147,7 @@ public class GestionGaraje {
                         System.out.println("Cual garaje deseas escoger?");
                         int opcionGarajeIndice = scanner.nextInt();
 
+                        
                         do {
                             System.out.println("\n--- Menú de Gestión del Garaje ---");
                             System.out.println("1. Alquilar un espacio");
@@ -178,15 +178,24 @@ public class GestionGaraje {
                                     String placa = scanner.nextLine().trim(); // Elimina espacios adicionales
                                     System.out.println("Matrícula ingresada: " + placa);
 
-                                    Vehiculo vehiculo = null;
 
-                                    if (tipo.equals("camion")) {
-                                        // Validar si se puede registrar un camión
-                                        if (coleccionGaraje.get(opcionGarajeIndice).puedeAgregarCamion()) {
-                                            System.out.println(
-                                                    "No se puede registrar más camiones en este garaje. Límite alcanzado.");
-                                            break;
+                                    boolean matriculaRepetida = false;
+
+                                        if(matriculas.size() > 0){
+                                        for(int i = 0; matriculas.size() > i; i++){
+                                        
+                                          if (matriculas.get(i) == coleccionGaraje.get(i).espacios.get(i).getPlaca()) {
+                                            matriculaRepetida = true;
+                                            
                                         }
+                                        
+                                         }
+                                     
+                                        }
+                                    Vehiculo vehiculo = null;
+                                    if(matriculaRepetida == false){
+                                        matriculas.add(placa);
+                                    if (tipo.equals("camion")) {
                                         System.out.print("Ingrese el tipo de camión (sencillo/doble): ");
                                         String tipoCamion = scanner.nextLine();
                                         System.out.print("Ingrese el número de ejes: ");
@@ -194,22 +203,19 @@ public class GestionGaraje {
                                         System.out.print("Ingrese la capacidad de carga en toneladas: ");
                                         double capacidadCarga = scanner.nextDouble();
                                         scanner.nextLine();
-                                        vehiculo = new Camion(placa, marca, precio, cilindraje, placa, opcion,
-                                                cilindraje, tipo, numeroEjes, tipoCamion, capacidadCarga);
+                                        vehiculo = new Camion(placa, marca, precio, cilindraje, placa, opcion, cilindraje, tipo, numeroEjes, tipoCamion, capacidadCarga);
                                     } else if (tipo.equals("moto")) {
                                         System.out.print("¿Tiene sidecar? (true/false): ");
                                         boolean tieneSidecar = scanner.nextBoolean();
                                         scanner.nextLine();
-                                        vehiculo = new Moto(placa, marca, precio, cilindraje, placa, opcion, cilindraje,
-                                                tipo, tieneSidecar);
+                                        vehiculo = new Moto(placa, marca, precio, cilindraje, placa, opcion, cilindraje, tipo, tieneSidecar);
                                     } else if (tipo.equals("auto")) {
                                         System.out.print("¿Tiene radio? (true/false): ");
                                         boolean tieneRadio = scanner.nextBoolean();
                                         System.out.print("¿Tiene navegador? (true/false): ");
                                         boolean tieneNavegador = scanner.nextBoolean();
                                         scanner.nextLine();
-                                        vehiculo = new Auto(tieneNavegador, tieneRadio, placa, marca, precio,
-                                                cilindraje, placa, opcion, cilindraje, tipo);
+                                        vehiculo = new Auto(tieneNavegador, tieneRadio, placa, marca, precio, cilindraje, placa, opcion, cilindraje, tipo);
 
                                     } else if (tipo.equals("camioneta")) {
                                         System.out.print("Ingrese el tipo de servicio (SUV/Pickup/Carga/Otro): ");
@@ -219,8 +225,8 @@ public class GestionGaraje {
                                         System.out.print("¿Tiene remolque? (true/false): ");
                                         boolean tieneRemolque = scanner.nextBoolean();
                                         scanner.nextLine();
-                                        vehiculo = new Camioneta(numeroPasajeros, tieneRemolque, tipoServicio, placa,
-                                                marca, precio, cilindraje, marca, precio, precio, tipo);
+                                        vehiculo = new Camioneta(numeroPasajeros, tieneRemolque, tipoServicio, placa, marca, precio, cilindraje, marca, precio, precio, tipo);
+                                      
 
                                     } else {
                                         System.out.println("Tipo de vehículo no reconocido.");
@@ -244,16 +250,19 @@ public class GestionGaraje {
                                             System.out.println("No hay espacio disponible en el garaje.");
                                         }
                                     }
+                                } else {
+                                    System.out.println("La matricula de su vehiculo ya existe");
+                                }
                                     break;
 
                                 case 2:
-                                    if (coleccionGaraje.size() > 0) {
-                                        for (int i = 0; coleccionGaraje.size() > i; i++) {
-                                            coleccionGaraje.get(i).espacios.get(i).mostrarCaracteristicasVehiculos(i);
-                                            System.out.println("");
-                                            Thread.sleep(3 * 1000);
-                                        }
+                                if (coleccionGaraje.size() > 0) {
+                                    for (int i = 0; coleccionGaraje.size() > i; i++) {
+                                        coleccionGaraje.get(i).espacios.get(i).mostrarCaracteristicasVehiculos(i); 
+                                        System.out.println("");
+                                        Thread.sleep(3 * 1000);
                                     }
+                                }
                                     System.out.print("Ingrese la matrícula del vehículo a retirar: ");
                                     String matriculaRetirar = scanner.nextLine();
                                     coleccionGaraje.get(opcionGarajeIndice).retirarVehiculo(matriculaRetirar);
@@ -289,8 +298,9 @@ public class GestionGaraje {
                                 case 8:
                                     coleccionGaraje.get(opcionGarajeIndice).listarCamionetasPorTipo();
                                     break;
+
                                 case 0:
-                                    System.out.println("Saliendo del garaje...");
+                                    System.out.println("Saliendo del sistema...");
                                     break;
 
                                 default:
@@ -298,82 +308,10 @@ public class GestionGaraje {
                             }
                         } while (opcion != 0);
 
-                     
+                        scanner.close();
                     } else {
                         System.out.println("Aun no existe ningun Garaje");
                     }
-
-                case 5:
-                    System.out.println("1. Ver ocupación de un garaje específico");
-                    System.out.println("2. Ver ocupación de todos los garajes");
-                    System.out.println("3. Ver ocupación por tipo de vehículo");
-                    System.out.println("4. Ver recaudo mensual");
-                    int opcionInforme = scanner.nextInt();
-
-                    switch (opcionInforme) {
-                        case 1:
-                        Scanner garageinfo = new Scanner(System.in);
-                        if (coleccionGaraje.size() > 0) {
-                            for (int i = 0; coleccionGaraje.size() > i; i++) {
-                                coleccionGaraje.get(i).mostrarCaracteristicas(i);
-                                System.out.println("");
-                                Thread.sleep(3 * 1000);
-                            }
-                        }
-                            System.out.println(""); 
-                            System.out.println("Eliga el garaje que desea ver su ocupacion");
-                            int ocupaciongaraje = garageinfo.nextInt();
-                        coleccionGaraje.get(ocupaciongaraje).mostrarOcupacionGaraje();
-                            break;
-                        case 2:
-                        System.out.println("Informe de Ocupación General ");
-                        int espaciosTotalesGeneral = 0;
-                        int espaciosOcupadosGeneral = 0;
-                
-                        for (int i = 0; coleccionGaraje.size()>i; i++) {
-                            espaciosTotalesGeneral += coleccionGaraje.get(i).getNumEspacios();
-                            espaciosOcupadosGeneral += coleccionGaraje.get(i).espacios.size();
-                
-                            System.out.println("Ocupación: " + espaciosOcupadosGeneral);
-                        }
-                
-                        double porcentajeOcupacionGeneral = (espaciosOcupadosGeneral * 100.0) / espaciosTotalesGeneral;
-                        System.out.println("\nOcupación total: " + String.format("%.2f%%", porcentajeOcupacionGeneral));
-                        
-                            break;
-                        case 3:
-                        Scanner garageinf = new Scanner(System.in);
-                        if (coleccionGaraje.size() > 0) {
-                            for (int i = 0; coleccionGaraje.size() > i; i++) {
-                                coleccionGaraje.get(i).mostrarCaracteristicas(i);
-                                System.out.println("");
-                                Thread.sleep(3 * 1000);
-                            }
-                        }
-                            System.out.println(""); 
-                            System.out.println("Eliga el garaje que desea ver su ocupacion de los vehiculos");
-                            int tipoVehiculo = garageinf.nextInt();
-                        coleccionGaraje.get(tipoVehiculo).mostrarOcupacionPorTipo();
-                            break;
-                        case 4:
-                        System.out.println(" Informe de Recaudo Mensual ");
-                        double recaudoTotal = 0;
-
-                        if (coleccionGaraje.size() > 0) {
-                        for (int i = 0 ; coleccionGaraje.size()>i; i++) {
-                            double recaudoGaraje = coleccionGaraje.get(i).calcularIngresos();
-                            recaudoTotal += recaudoGaraje;
-            
-                            System.out.println("\nGaraje en " + coleccionGaraje.get(i).getCiudad());
-                            System.out.println("Dirección: " + coleccionGaraje.get(i).getDireccion());
-                            System.out.println("Recaudo mensual: $" + String.format("%.2f", recaudoGaraje));
-                          }
-                        }
-            
-                        System.out.println("\nRecaudo mensual total: $" + String.format("%.2f", recaudoTotal));
-                         break;
-                    }
-                    break;
 
                 default:
                     System.out.println("Opción no válida. Intente nuevamente.");
@@ -384,3 +322,4 @@ public class GestionGaraje {
 
     }
 }
+
